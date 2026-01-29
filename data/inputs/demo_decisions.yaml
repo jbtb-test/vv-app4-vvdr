@@ -38,6 +38,45 @@
   status: "ACCEPTED"
   decision_type: "QUALITY"
   source: "MANUAL"
-  supersedes: "VVDR-000"
+  supersedes: "null"
   tags: ["Git", "Demo"]
   risk_refs: ["R5"]
+
+- decision_id: "VVDR-004"
+  date: "2026-01-26"
+  title: "Standard APP1 obligatoire pour toute app V&V (R2)"
+  context: "Risque R2: incohérences multi-repos (structure, tests, templates, CLI) qui dégradent le pilotage et la maintenabilité."
+  decision: "Toute nouvelle app V&V doit respecter le standard APP1: layout src/, dossiers docs/data/tests/tools/templates, templates/TEMPLATES_REF, conventions CLI, et hygiène git. Tout écart doit être justifié par une décision VVDR."
+  rationale: "Réduction dette + revues simplifiées + onboarding rapide + cohérence portfolio."
+  status: "ACCEPTED"
+  decision_type: "GOVERNANCE"
+  source: "MANUAL"
+  tags: ["Standard", "Portfolio", "Maintainability"]
+  risk_refs: ["R2"]
+  owner: "V&V"
+
+- decision_id: "VVDR-005"
+  date: "2026-01-26"
+  title: "Lisibilité recruteur: compréhension < 2 minutes sans exécuter (R3)"
+  context: "Risque R3: un recruteur ne doit pas dépendre de l'exécution (venv, clés IA, réseau) pour comprendre la valeur."
+  decision: "Chaque app doit fournir un README recruteur + un pack docs/demo figé (inputs + outputs + screenshots) permettant une compréhension < 2 minutes sans lancer de code."
+  rationale: "Démo autonome, réduction friction entretien, évite les contextes env/IA."
+  status: "ACCEPTED"
+  decision_type: "PROCESS"
+  source: "MANUAL"
+  tags: ["Recruiter", "Demo", "Documentation"]
+  risk_refs: ["R3"]
+  owner: "V&V"
+
+- decision_id: "VVDR-006"
+  date: "2026-01-26"
+  title: "Stratégie de tests: unit + smoke E2E avant merge main (R4)"
+  context: "Risque R4: régressions non détectées et preuves V&V insuffisantes avant livraison."
+  decision: "Avant tout merge integration -> main: pytest doit être vert (tests unitaires + smoke E2E). Si la CI est indisponible (ex: billing lock), la preuve locale (pytest -q) doit être consignée et la situation CI documentée."
+  rationale: "Rigueur V&V, preuves reproductibles, maîtrise des régressions."
+  status: "ACCEPTED"
+  decision_type: "QUALITY"
+  source: "MANUAL"
+  tags: ["Tests", "Quality", "CI"]
+  risk_refs: ["R4"]
+  owner: "V&V"
