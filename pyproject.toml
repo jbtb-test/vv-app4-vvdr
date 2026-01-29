@@ -62,5 +62,6 @@ where = ["src"]
 include = ["vv_app4_vvdr*"]
 
 [tool.pytest.ini_options]
+pythonpath = ["."]
 testpaths = ["tests"]
 addopts = "-ra"
