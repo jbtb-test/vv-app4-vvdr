@@ -1,0 +1,9 @@
+# requirements.txt (information / compatibility)
+# Source of truth: pyproject.toml
+#
+# Recommended installs:
+#   pip install -e ".[dev]"        # dev/test
+#
+# requirements.lock.txt is a local venv snapshot (pip freeze).
+
+PyYAML>=6.0
