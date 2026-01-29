@@ -38,7 +38,7 @@
   status: "ACCEPTED"
   decision_type: "QUALITY"
   source: "MANUAL"
-  supersedes: "null"
+  supersedes: null
   tags: ["Git", "Demo"]
   risk_refs: ["R5"]
 
