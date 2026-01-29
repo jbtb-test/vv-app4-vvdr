@@ -1,0 +1,43 @@
+# APP4 VVDR - Demo decisions (source of truth)
+# Format supported:
+# - list of records
+# - OR wrapper: { decisions: [...] }
+
+- decision_id: "VVDR-001"
+  date: "2026-01-15"
+  title: "Activer l'IA en mode suggestion-only (gouvernance)"
+  context: "Les apps APP1/APP2/APP3 proposent un mode IA optionnel. Risque R1: IA non contrôlée."
+  decision: "L'IA est autorisée uniquement en suggestion-only, désactivée par défaut (ENABLE_AI=0), jamais bloquante."
+  rationale: "Conformité audit/V&V + déterminisme prioritaire + reproductibilité."
+  status: "ACCEPTED"
+  decision_type: "GOVERNANCE"
+  source: "MANUAL"
+  references: ["docs/INTERNAL_AI_VALIDATION.md"]
+  tags: ["AI", "Governance"]
+  risk_refs: ["R1"]
+  owner: "V&V"
+
+- decision_id: "VVDR-002"
+  date: "2026-01-20"
+  title: "Standardiser l'environnement (load_env_secret.ps1)"
+  context: "Incohérences entre apps sur le chargement des variables d'environnement."
+  decision: "Utiliser .\\tools\\load_env_secret.ps1 puis $env:ENABLE_AI='1' pour activer l'IA."
+  rationale: "Onboarding plus simple + moins d'erreurs + standard portfolio."
+  status: "ACCEPTED"
+  decision_type: "PROCESS"
+  source: "MANUAL"
+  tags: ["Env", "Standard"]
+  risk_refs: ["R6"]
+
+- decision_id: "VVDR-003"
+  date: "2026-01-22"
+  title: "Ignorer les outputs runtime et stabiliser les exports"
+  context: "Des outputs runtime ont été committés (env_report)."
+  decision: "Les outputs runtime ne doivent jamais être committés; seuls les outputs figés du demo pack sont versionnés."
+  rationale: "Hygiène Git + repo propre + démo reproductible."
+  status: "ACCEPTED"
+  decision_type: "QUALITY"
+  source: "MANUAL"
+  supersedes: "VVDR-000"
+  tags: ["Git", "Demo"]
+  risk_refs: ["R5"]
