@@ -46,13 +46,18 @@ from typing import Any, Iterable, List, Mapping, Sequence
 
 import yaml
 
-from vv_app4_vvdr.models import DecisionRecord
+from vv_app4_vvdr.models import (
+    DecisionRecord,
+    ModelError,
+    ensure_unique_ids,
+    sort_records,
+)
 
 
 # ============================================================
 # Errors (clean messages)
 # ============================================================
-@dataclass(frozen=True)
+@dataclass
 class YamlLoaderError(RuntimeError):
     """Raised when the YAML loader fails with a user-friendly message."""
 
@@ -108,7 +113,13 @@ def load_decisions_from_yaml(path: Path) -> list[DecisionRecord]:
                 path=path,
             ) from exc
 
-    return _sorted_deterministic(records)
+    try:
+        ensure_unique_ids(records)
+        return sort_records(records)
+    except ModelError as exc:
+        # Encapsulation cohérente avec le contrat du loader
+        raise YamlLoaderError(message=str(exc), path=path) from exc
+
 
 
 # ============================================================
