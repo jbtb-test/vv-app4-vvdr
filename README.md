@@ -99,6 +99,7 @@ Ouvrir le .md / .csv / .json pour vérifier :
 
 ## Structure du projet
 
+```text
 vv-app4-vvdr/
 ├─ src/
 │  └─ vv_app4_vvdr/
@@ -111,6 +112,7 @@ vv-app4-vvdr/
 │  └─ inputs/
 ├─ docs/
 └─ README.md
+```
 
 ---
 
