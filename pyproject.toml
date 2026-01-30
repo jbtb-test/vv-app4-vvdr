@@ -1,0 +1,67 @@
+# ============================================================
+# pyproject.toml
+# ------------------------------------------------------------
+# Rôle :
+#   Définition du projet Python et de son mode d’installation.
+#
+#   Ce fichier est utilisé par pip / setuptools pour :
+#     - rendre le package installable (pip install -e ".[dev]")
+#     - gérer correctement le layout "src/"
+#     - éviter l’usage de PYTHONPATH
+#
+#   Choix d’architecture :
+#     - layout src/ avec package explicite (vv_app4_vvdr)
+#     - séparation claire code / tests / data / docs
+#
+#   Ce choix est volontaire et commun aux apps du portfolio
+#   (APP1 QRA, APP2 TCTC, APP3 AITA, APP4 VVDR).
+# ============================================================
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vv-app4-vvdr"
+version = "0.1.0"
+description = "APP4 VVDR — V&V Decision Record (audit-ready registry of human V&V decisions)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "jbtb-test" }
+]
+keywords = ["V&V", "decision record", "governance", "audit", "traceability"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+# Runtime dependencies (minimal, required to run the app)
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+# Dev/Test tooling (local + CI)
+dev = [
+  "pytest==9.0.2",
+]
+
+[project.scripts]
+vv-app4-vvdr = "vv_app4_vvdr.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["vv_app4_vvdr*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"
